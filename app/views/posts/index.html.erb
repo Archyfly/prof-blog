@@ -1,0 +1,36 @@
+<div class="bg-primary">
+  <h2>Posts in Prof Blog</h2>
+</div>
+<div class="text-left btn btn-warning">
+  <%= link_to "NEW POST", new_post_path %>
+</div>
+
+<div class="container">
+  <% @posts.each do |post| %>
+    <div class="col-xs-12 bg-success">
+      <h5><b><%= post.title %></b></h5>
+      <h6><%= post.created_at.strftime('%b %d, %Y') %></h6>
+    </div>
+    <div class="text-left">
+      <%= raw(post.body).truncate(358) %>
+    </div>
+    <br />
+    <div class="text-right">
+      <div class="text-right btn btn-warning">
+        <%= link_to "read more", post_path(post) %>
+      </div>
+    <% if user_signed_in? %>
+      <div class="text-right btn btn-warning">
+        <%= link_to "edit post", edit_post_path(post) %>
+      </div>
+      <div class="text-right btn btn-warning">
+        <%= link_to "delete post", post_path(post),
+          method: :delete,
+          data: { confirm: 'This test will be deleted! Are you sure?' } %>
+      </div>
+
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div><br/>
