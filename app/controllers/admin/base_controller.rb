@@ -6,7 +6,7 @@ class Admin::BaseController < ApplicationController
   private
 
   def admin_required!
-    redirect_to root_path if, alert: 'You are not allowed to view this page' unless current_user.is_a?(Admin)
+    redirect_to root_path, alert: 'You are not allowed to view this page' unless current_user.user_type == 'Admin'
   end
 
 
